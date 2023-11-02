@@ -1,0 +1,131 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+ 
+public class Calc extends JFrame implements ActionListener
+{
+   static JButton add,sub,mul,div,mod,equalsto,clr;
+   static JButton b[]=new JButton[10];
+   static JTextField  tf=new JTextField(10);
+   int num1,num2;
+   double result;
+   String op;
+   public static void main(String[] args) 
+  {
+      JFrame jf=new JFrame();
+      JPanel p=new JPanel();
+      jf.setSize(400,500);
+      GridLayout gl=new GridLayout(4,5);
+      p.setLayout(gl);
+      add=new JButton("+");
+      sub=new JButton("-");
+      mul=new  JButton("*");
+      div=new JButton("/");
+      mod=new JButton("%");
+      equalsto=new JButton("=");
+      clr=new JButton("CLR");
+      for(int i=0;i<=9;i++)
+      {
+         b[i]=new JButton(""+i);
+      }
+      Calc c= new Calc();
+      add.addActionListener(c);
+      sub.addActionListener(c);
+      mul.addActionListener(c);
+      div.addActionListener(c);
+      mod.addActionListener(c);
+      equalsto.addActionListener(c);
+      clr.addActionListener(c);
+      for(int i=0;i<=9;i++)
+      {
+        b[i].addActionListener(c);
+       }
+       p.add(tf);
+        p.add(add);
+        p.add(sub);
+        p.add(mul);
+        p.add(div);
+        p.add(mod);
+        p.add(equalsto);
+        p.add(clr);
+        for(int i=0;i<=9;i++)
+        {
+          p.add(b[i]);
+         }
+         
+         jf.add(p);
+         jf.show();
+          
+   }
+   public void actionPerformed(ActionEvent ae)
+    {
+      String str=ae.getActionCommand();
+      char ch=str.charAt(0);
+      if(Character.isDigit(ch))
+      {
+        tf.setText(tf.getText()+str);
+      }
+      else
+      {
+        if(str.equals("+"))
+        {
+          num1=Integer.parseInt(tf.getText());
+          op="+";
+          tf.setText("");
+        }
+       else  if(str.equals("-"))
+          {
+             num1=Integer.parseInt(tf.getText());
+             op="-";
+             tf.setText("");
+          }
+          else  if(str.equals("*"))  
+          {
+            num1=Integer.parseInt(tf.getText());
+            op="*";
+            tf.setText("");
+          }
+          else if(str.equals("/"))
+          {
+            num1=Integer.parseInt(tf.getText());
+            op="/";
+            tf.setText("");
+          }
+          else if(str.equals("%"))
+          {
+            num1=Integer.parseInt(tf.getText());
+            op="%";
+            tf.setText("");
+          }
+          if(str.equals("="))
+          {
+            num2=Integer.parseInt(tf.getText());
+            if(op.equals("+"))
+              {
+                 result=num1+num2;
+              }
+             if(op.equals("-"))
+               {
+                 result=num1-num2;
+                }
+                if(op.equals("*"))
+                 {
+                    result=num1*num2;
+                 }
+                 if(op.equals("/"))
+                 {
+                   result=(double)num1/num2;
+                 }
+                 if(op.equals("%"))
+                  {
+                    result=num1%num2;
+                  }
+                  tf.setText(""+result);
+            }
+            if(str.equals("CLR"))
+            {
+               tf.setText("");
+            }
+       }
+  }
+}
